@@ -195,7 +195,11 @@ __attribute__((weak)) void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
 //
 // raw_hid_send() is called at the end, with the same buffer, which was
 // possibly modified with returned values.
-void raw_hid_receive(uint8_t *data, uint8_t length) {
+#ifdef VIA_OPENRGB_HYBRID
+void via_raw_hid_receive(uint8_t *data, uint8_t length) {
+#else
+void via_raw_hid_receive(uint8_t *data, uint8_t length) {
+#endif
     uint8_t *command_id   = &(data[0]);
     uint8_t *command_data = &(data[1]);
     switch (*command_id) {
