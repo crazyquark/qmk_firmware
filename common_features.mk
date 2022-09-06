@@ -142,7 +142,7 @@ else
       else ifeq ($(MCU_SERIES)_$(MCU_LDSCRIPT), SN32F260_SN32F260)
         SRC += $(PLATFORM_COMMON_DIR)/eeprom_sn32.c
         OPT_DEFS += -DEEPROM_EMU_SN32F260
-        OPT_DEFS += -DSN32_EEPROM_ENABLE        
+        OPT_DEFS += -DSN32_EEPROM_ENABLE
       else ifeq ($(MCU_SERIES)_$(MCU_LDSCRIPT), STM32F0xx_STM32F042x6)
 
         # Stack sizes: Since this chip has limited RAM capacity, the stack area needs to be reduced.
@@ -263,7 +263,7 @@ endif
     ifeq ($(strip $(RGB_MATRIX_DRIVER)), SN32F248B)
         COMMON_VPATH += $(DRIVER_PATH)/sn32
         SRC += rgb_matrix_sn32f248b.c
-    endif    
+    endif
 
     ifeq ($(strip $(RGB_MATRIX_CUSTOM_KB)), yes)
         OPT_DEFS += -DRGB_MATRIX_CUSTOM_KB
@@ -419,11 +419,11 @@ ifeq ($(strip $(OPENRGB_ENABLE)), yes)
     OPT_DEFS += -DOPENRGB_ENABLE
 endif
 
-ifeq ($(strip $(OPENRGB_ENABLE)), yes)
-  ifeq ($(strip $(VIA_ENABLE)), yes)
-    $(error OPENRGB_ENABLE and VIA_ENABLE cannot currently be 'yes' simultaneously)
-  endif
-endif
+# ifeq ($(strip $(OPENRGB_ENABLE)), yes)
+#   ifeq ($(strip $(VIA_ENABLE)), yes)
+#     $(error OPENRGB_ENABLE and VIA_ENABLE cannot currently be 'yes' simultaneously)
+#   endif
+# endif
 ifeq ($(strip $(DYNAMIC_KEYMAP_ENABLE)), yes)
     OPT_DEFS += -DDYNAMIC_KEYMAP_ENABLE
     SRC += $(QUANTUM_DIR)/dynamic_keymap.c

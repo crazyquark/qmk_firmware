@@ -24,16 +24,16 @@
 #define PRODUCT_ID      0x652F
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    Glorious
-#define PRODUCT         GMMK FULL
-#define DESCRIPTION     "Mechanical keyboard"
+#define PRODUCT         GMMK TKL
+#define DESCRIPTION     "Mechanical Keyboard"
 
 /* key matrix size */
 #define MATRIX_ROWS 7
-#define MATRIX_COLS 16
+#define MATRIX_COLS 13
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS { D0, D1, D2, D3, D4, D5, D6 }
-#define MATRIX_COL_PINS { C1, C2, A0, A1, A2, A3, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15 }
+#define MATRIX_COL_PINS { C1, C2, A0, A1, A2, A3, A6, A7, A8, A9, A10, A11, A12}
 #define UNUSED_PINS
 
 /* COL2ROW or ROW2COL */
@@ -41,7 +41,9 @@
 #define USB_POLLING_INTERVAL_MS 1
 
 /* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
+#define DEBOUNCE 1
+
+#define VIA_OPENRGB_HYBRID
 
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION

@@ -21,18 +21,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LED_MATRIX_ROWS_HW (LED_MATRIX_ROWS * LED_MATRIX_ROW_CHANNELS)
 
 #define LED_MATRIX_ROW_PINS MATRIX_ROW_PINS
-#define LED_MATRIX_COLS 16
-
+#define LED_MATRIX_COLS 13
 #define LED_MATRIX_COL_PINS MATRIX_COL_PINS
 
+#ifndef VIA_ENABLE
 #ifdef QMK_KEYMAP_H
     #include QMK_KEYMAP_H
 #endif
+#endif
 
 #ifdef KEYMAP_ISO
-    #define DRIVER_LED_TOTAL 105
+    #define DRIVER_LED_TOTAL 88
 #else
-    #define DRIVER_LED_TOTAL 104
+    #define DRIVER_LED_TOTAL 87
 #endif
 
 /* indicator pins */

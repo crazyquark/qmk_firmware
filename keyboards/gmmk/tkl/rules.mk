@@ -65,7 +65,7 @@ LTO_ENABLE = yes
 USE_EXCEPTIONS_STACKSIZE = 0xD0
 USE_PROCESS_STACKSIZE = 0x1E0
 
-DEFAULT_FOLDER = gmmk/full/rev3
+DEFAULT_FOLDER = gmmk/tkl/rev3
 
 # process stack size of 0x1c0 crashes during SEND_STRING
 USE_EXCEPTIONS_STACKSIZE = 0xD0
