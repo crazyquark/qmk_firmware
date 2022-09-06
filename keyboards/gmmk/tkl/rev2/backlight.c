@@ -37,6 +37,10 @@
 static uint8_t sel_frame[2] = {0xFF, 0xFF};
 static uint8_t sel_frame_idx = 0;
 
+#ifdef VIA_OPENRGB_HYBRID
+extern uint8_t is_orgb_mode;
+#endif
+
 static void i2c_delay(uint32_t loop)
 {
     #pragma GCC unroll 0
@@ -45,7 +49,7 @@ static void i2c_delay(uint32_t loop)
 }
 
 void i2c_init(void)
-{   
+{
     // drive strength all gpio A 20ma
     SN_GPIO0->MODE |= 0xFFFF0000;
 
@@ -119,13 +123,13 @@ I2C_STATE_WRITE_BYTE:
 
 I2C_STATE_READ_ACK:
     setPinInput(I2C_SDA);
-    
+
     I2C_SCL_HI;
     I2C_DELAY;
-    
+
     /* ignore ACK */
     fail = I2C_SDA_IN;
-    
+
     I2C_SCL_LO;
     I2C_DELAY;
 
@@ -149,16 +153,16 @@ I2C_STATE_READ_ACK:
 static uint8_t i2c_write_buf(uint8_t devid, uint8_t* data, uint8_t len)
 {
     int32_t tries = 1;
-    
+
     while ((tries-- > 0) && i2c_transaction(devid, data, len));
-    
+
     return 0;
 }
 
 static void i2c_write_reg(uint8_t devid, uint8_t reg, uint8_t data)
 {
     uint8_t i2c_data[2];
-    
+
     i2c_data[0] = reg;
     i2c_data[1] = data;
 
@@ -213,7 +217,7 @@ static const uint8_t g_led_pos[DRIVER_LED_TOTAL] = {
 /*91*/ 0x03,0x04,0x05,0x07,0x09,0x0A,0x0B,0x0D,0x0E,0x0F,0x3B
 #ifdef KEYMAP_ISO
        ,0x04 /* KC_NUBS */
-#endif    
+#endif
 };
 
 /*
@@ -250,7 +254,7 @@ static void set_pwm(uint8_t dev, uint8_t addr, uint8_t value)
 }
 
 void _set_color(int index, uint8_t r, uint8_t g, uint8_t b)
-{   
+{
     uint8_t dev;
     int l = g_led_pos[index];
 
@@ -262,6 +266,11 @@ void _set_color(int index, uint8_t r, uint8_t g, uint8_t b)
         dev = 0xE8;
         sel_frame_idx = 0;
     }
+
+#ifdef VIA_OPENRGB_HYBRID
+    if (!is_orgb_mode && (index == 67 || index == 41 || index == 51))
+        r = g = b = 255;
+#endif
 
     set_pwm(dev, l, r);
     set_pwm(dev, l + 0x10, g);
